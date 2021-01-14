@@ -4,8 +4,9 @@
 // import Parrafo from "./components/Parrafo.jsx";
 // import Variables from "./components/Variables.jsx";
 // import Forms from "./components/Forms.jsx";
+// import CrudSimple from "./components/CrudSimple.jsx";
 
-import CrudSimple from "./components/CrudSimple.jsx";
+import Comentario from "./components/Comentario.jsx";
 import Saludo from "./components/Saludo.jsx";
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         {/* <Lists/> */}
         {/* <Forms/> */}
         {/* <CrudSimple/> */}
-        <Saludo/>
+
+        <Saludo persona="Farney" edad={38}/>
       </div>
     </div>
   );
