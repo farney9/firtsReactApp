@@ -6,6 +6,7 @@
 // import Forms from "./components/Forms.jsx";
 
 import CrudSimple from "./components/CrudSimple.jsx";
+import Saludo from "./components/Saludo.jsx";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         {/* <Counter/> */}
         {/* <Lists/> */}
         {/* <Forms/> */}
-        <CrudSimple/>
+        {/* <CrudSimple/> */}
+        <Saludo/>
       </div>
     </div>
   );
