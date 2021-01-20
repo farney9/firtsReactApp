@@ -20,7 +20,7 @@ const Nosotros = () => {
 
     return (
         <div>
-            <h1>Nosotros</h1>
+            <h1>Civilización</h1>
             <hr />
             <table className="table table-hover table-striped my-4">
                 <thead className="table-dark">

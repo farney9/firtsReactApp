@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Link, Switch, NavLink } from "react-router-dom";
 import Civilizacion from './Civilizacion';
 import Contacto from './Contacto';
+import CrudFirebase from './CrudFirebase';
 import Inicio from './Inicio';
 import Nosotros from './Nosotros';
 
@@ -41,16 +42,24 @@ const RouteComponent = () => {
                                         activeClassName="active">Contacto
                                     </NavLink>
                                 </li>
+                                <li className="nav-item">
+                                    <NavLink 
+                                        to="/crudfirebase" 
+                                        className="nav-link"
+                                        activeClassName="active">CRUD Firebase
+                                    </NavLink>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
                 <div className="container my-5">
                     <Switch>
-                        <Route path="/nosotros"><Nosotros/></Route>
-                        <Route path="/nosotros:id"><Civilizacion/></Route>
+                        <Route path="/nosotros" exact><Nosotros/></Route>
+                        <Route path="/nosotros/:id"><Civilizacion/></Route>
                         <Route path="/inicio"><Inicio/></Route>
                         <Route path="/contacto"><Contacto/></Route>
+                        <Route path="/crudfirebase"><CrudFirebase/></Route>
                         <Route path="/" exact><Inicio/></Route>
                     </Switch>
                 </div>
