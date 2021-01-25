@@ -54,10 +54,10 @@ const Navbar = () => {
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li>
                                     <NavLink 
-                                        to="/inicio">
+                                        to="/login">
                                         <button
-                                            className="btn btn-outline-primary rounded-pill me-2" 
-                                            type="button">Inicio
+                                            className="btn btn-outline-primary me-2" 
+                                            type="button">Login
                                         </button>    
                                     </NavLink>
                                 </li>
@@ -66,7 +66,7 @@ const Navbar = () => {
                                     <NavLink 
                                         to="/admin">
                                         <button
-                                            className="btn btn-outline-primary rounded-pill" 
+                                            className="btn btn-outline-primary" 
                                             type="button">Admin
                                         </button>    
                                     </NavLink>
