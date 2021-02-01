@@ -1,6 +1,7 @@
 import React from 'react'
 import { auth } from "../firebase";
 import { withRouter } from 'react-router-dom';
+import CrudFirebaseWithUsers from './CrudFirebaseWithUsers';
 
 
 const Admin = (props) => {
@@ -24,7 +25,7 @@ const Admin = (props) => {
             {/* <h4>Admin</h4> */}
             {
                 user && (
-                    <h3>Hola {user.email}!</h3>
+                    <CrudFirebaseWithUsers user={user}/>
                     )
                 }
         <br/>

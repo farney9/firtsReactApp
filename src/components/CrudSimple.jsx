@@ -10,7 +10,7 @@ const CrudSimple = () => {
 
     const editar = item => {
         setModoEdicion(true)
-        setTarea(item.tarea) // tarea es la propiedad del obeto: el objeto tiene 2 propiedades: id, tarea
+        setTarea(item.tarea) // tarea es la propiedad del objeto: el objeto tiene 2 propiedades: id, tarea
         setId(item.id)
     }
 

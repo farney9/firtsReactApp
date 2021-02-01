@@ -66,7 +66,7 @@ const Navbar = (props) => {
                                         <NavLink 
                                         to="/admin">
                                             <button
-                                                className="btn btn-outline-primary" 
+                                                className="btn btn-outline-primary me-2" 
                                                 type="button">Admin
                                             </button>    
                                         </NavLink>
