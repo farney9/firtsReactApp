@@ -1,7 +1,15 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link, Switch, NavLink } from "react-router-dom";
+import { auth } from "../firebase";
 
-const Navbar = () => {
+import { Link, NavLink, withRouter } from "react-router-dom";
+
+const Navbar = (props) => {
+    const onLogOut = () => {
+        auth.signOut()
+                .then(() => {
+                    props.history.push('/login')
+                })
+    }
     return (
         <>
                 <nav className="navbar navbar-dark sticky-top bg-dark navbar-expand-md">
@@ -51,25 +59,40 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                             </ul>
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li>
-                                    <NavLink 
-                                        to="/login">
-                                        <button
-                                            className="btn btn-outline-primary me-2" 
-                                            type="button">Login
-                                        </button>    
-                                    </NavLink>
+                                {
+                                    props.fireBaseUser !== null ? (
+                                        <NavLink 
+                                        to="/admin">
+                                            <button
+                                                className="btn btn-outline-primary" 
+                                                type="button">Admin
+                                            </button>    
+                                        </NavLink>
+                                        
+                                    ) : null
+                                    }
                                 </li>
 
                                 <li>
-                                    <NavLink 
-                                        to="/admin">
-                                        <button
-                                            className="btn btn-outline-primary" 
-                                            type="button">Admin
-                                        </button>    
-                                    </NavLink>
+                                    {
+                                        props.fireBaseUser !== null ? (
+                                            <button
+                                                onClick={() => onLogOut()}
+                                                className="btn btn-outline-primary" 
+                                                type="button">Cerrar Sesión
+                                            </button>
+                                        ) : (
+                                            <NavLink 
+                                            to="/admin">
+                                                <button
+                                                    className="btn btn-outline-primary" 
+                                                    type="button">Login
+                                                </button>    
+                                            </NavLink>
+                                        )
+                                    }
                                 </li>
                             </ul>
                             {/* <form className="d-flex">
@@ -82,4 +105,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default withRouter(Navbar)
