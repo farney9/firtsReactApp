@@ -1,4 +1,6 @@
 import React from 'react'
+import moment from "moment";
+import 'moment/locale/es' ;
 
 import { db } from "../firebase";
 const CrudFirebaseWithUsers = (props) => {
@@ -8,7 +10,8 @@ const CrudFirebaseWithUsers = (props) => {
     const [tareas, setTareas] = React.useState([])
     const [error, setError] = React.useState(null)
     const [id, setId] = React.useState('')
-
+    const [ultimo, setUltimo] = React.useState(null)
+    const [desactivar, setDesactivar] = React.useState(false)
 
     const editar = item => {
         setModoEdicion(true)
@@ -78,31 +81,70 @@ const CrudFirebaseWithUsers = (props) => {
               console.log(error);
           }
     }
-    
-    React.useState(() => {
-      const obtenerDatos = async () => {
+
+    const onVerMas = async () => {
+        console.log('Ver mas ..');
         try {
-          const data = await db.collection(props.user.uid).get();
-          console.log(data.docs);
+            const data = await db.collection(props.user.uid).orderBy('fecha', 'desc').limit(5).startAfter(ultimo).get();
+            const arrayData = data.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+
+          setTareas([
+              ...tareas,
+              ...arrayData
+          ]);
+
+          setUltimo(data.docs[data.docs.length -1])
+
+          const query = await db.collection(props.user.uid).orderBy('fecha', 'desc').limit(2).startAfter(data.docs[data.docs.length -1]).get();
+
+          if (query.empty) {
+              console.log('No hay más registros');
+              setDesactivar(true)
+          } else {
+              setDesactivar(false)
+          }
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    
+    React.useEffect(() => {
+      const obtenerDatos = async () => {
+          setDesactivar(true)
+        try {
+          const data = await db.collection(props.user.uid).orderBy('fecha', 'desc').limit(5).get();
+        //   console.log(data.docs);
    
-          const arrayData = data.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          const arrayData = data.docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+
+          setUltimo(data.docs[data.docs.length -1])
+          
           console.log(arrayData);
           setTareas(arrayData);
+          const query = await db.collection(props.user.uid).orderBy('fecha', 'desc').limit(2).startAfter(data.docs[data.docs.length -1]).get();
+
+          if (query.empty) {
+              console.log('No hay más registros');
+              setDesactivar(true)
+          } else {
+              setDesactivar(false)
+          }
+
         } catch (error) {
           console.log(error);
         }
       };
    
       obtenerDatos();
-    }, [modoEdicion]);
+    }, [props.user.uid]);
 
    
     return (
         <div>
             <h4>Crud Firebase With User Accounts</h4>
+            <hr/>
+            <h3>Hi {props.user.email}!</h3>
             <hr/>
             <div className="row">
                 <div className="col-8">
@@ -117,7 +159,8 @@ const CrudFirebaseWithUsers = (props) => {
                         : (
                             tareas.map(item => (
                             <li className="list-group-item" key={item.id}>
-                                <span className="lead">{item.name}</span>
+                                <span className="lead">{item.name} - {moment(item.fecha).format('MMMM Do YYYY, h:mm:ss a')}</span>
+                                <span className="lead">{item.fecha}</span>
                                 <button 
                                     onClick={() => eliminarTarea(item.id)}
                                     className="btn btn-sm btn-danger float-end mx-2">
@@ -136,6 +179,14 @@ const CrudFirebaseWithUsers = (props) => {
                         )
                     }
                     </ul>
+                    <div className="d-grid mt-2">
+                        <button
+                            onClick={()=> onVerMas()} 
+                            className="btn btn-outline-primary btn-sm fw-bold"
+                            disabled={desactivar}>
+                                Ver más...
+                        </button>
+                    </div>
                 </div>
                 <div className="col-4">
                     <h4 className="text-center">

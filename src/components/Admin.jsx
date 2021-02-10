@@ -10,7 +10,7 @@ const Admin = (props) => {
 
     React.useEffect(() => {
         if (auth.currentUser) {
-            console.log('existe usuario');
+            // console.log('existe usuario');
             setUser(auth.currentUser)
             
         } else {

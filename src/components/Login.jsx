@@ -6,8 +6,8 @@ import { db, auth } from "../firebase";
 
 const Login = (props) => {
 
-    const [email, setEmail] = React.useState('prueba@prueba.com')
-    const [password, setPassword] = React.useState('123123')
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
     const [error, setError] = React.useState(null)
     const [isRegistrered,setIsRegistrered] = React.useState(false)
 
@@ -77,7 +77,7 @@ const Login = (props) => {
 
            await db.collection(resp.user.uid).add({
                name: 'Tarea de Ejemplo',
-               Fecha: Date.now()
+               fecha: Date.now()
            })
            setEmail('')
            setPassword('')
@@ -147,6 +147,14 @@ const Login = (props) => {
                                 isRegistrered ? '¿Ya tienes una cuenta?' : '¿No tienes una cuenta?'
                             }
                         </button>
+                        {
+                            !isRegistrered ? (
+                                    <button
+                                    onClick={() => props.history.push('/reset')} 
+                                        className="btn btn-danger">¿Olvidó su contraseña?
+                                    </button>
+                            ): null
+                        }
                     </div>
                 </form>
             </div>

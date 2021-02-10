@@ -11,12 +11,13 @@ import Navbar from './Navbar';
 // FireBase
 import { auth } from "../firebase";
 import CrudFirebase from './CrudFirebase';
+import Reset from './Reset';
 
 const RouteComponent = () => {
     const [fireBaseUser, setFireBaseUser] = React.useState(false)
     React.useEffect(() =>{
         auth.onAuthStateChanged(user => {
-            console.log(user);
+            // console.log(user);
             if (user) {
                 setFireBaseUser(true)
                 
@@ -33,6 +34,7 @@ const RouteComponent = () => {
                     <Switch>
                         <Route path="/" exact><Inicio/></Route>
                         <Route path="/login"><Login/></Route>
+                        <Route path="/reset"><Reset/></Route>
                         <Route path="/admin"><Admin/></Route>
                         <Route path="/nosotros" exact><Nosotros/></Route>
                         <Route path="/nosotros/:id"><Civilizacion/></Route>
