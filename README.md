@@ -12,7 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <https://bluuweb.github.io/react-udemy/>
 
-# Getting Started
+## Getting Started
 
 In the project directory, you can run:
 
