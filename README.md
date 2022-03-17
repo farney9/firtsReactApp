@@ -4,6 +4,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+## `conceptos basicos de JavaScript`
+
+<https://codesandbox.io/s/reactjs-uh6oxi?file=/src/index.js/>
+
+## `Guia del curso`
+
+<https://bluuweb.github.io/react-udemy/>
+
+# Getting Started
+
 In the project directory, you can run:
 
 ### `npm start`
